@@ -9,12 +9,9 @@ namespace Server
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Waiting for a client to connect...");
             Server = new IPCServer();
-            await Server.Initialize();
-            Console.WriteLine("Client has successfully connected.");
-
-            while (Server.ServerStream.IsConnected)
+            
+            while (Server.IsActive)
             {
                 await Server.Main();
             }

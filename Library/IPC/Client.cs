@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Pipes;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -44,12 +41,14 @@ namespace Library.IPC
         {
             var json = Serialize(method, arguments);
             ClientStreamWriter.WriteLine(json);
+            ClientStreamWriter.Flush();
         }
 
         public async Task PostAsync<T>(MethodInfo method, params T[] arguments) where T : class
         {
             var json = Serialize(method, arguments);
             await ClientStreamWriter.WriteLineAsync(json);
+            await ClientStreamWriter.FlushAsync();
         }
 
         public void Dispose()

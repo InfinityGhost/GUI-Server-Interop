@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Library;
 using Library.IPC;
@@ -25,7 +21,5 @@ namespace GUI.ViewModels
         {
             await Client.PostAsync<string>(typeof(MainClass).GetMethod("SendMessage"), DateTime.Now.ToString());
         }
-
-        delegate bool Test(string arg1);
     }
 }
